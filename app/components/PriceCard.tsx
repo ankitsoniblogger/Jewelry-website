@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { useState, useEffect } from "react";
-import { FaCoins } from "react-icons/fa";
+import { useState, useEffect } from 'react';
+import { FaCoins } from 'react-icons/fa';
 
 interface PriceCardProps {
-  metal: "Gold" | "Silver";
+  metal: 'Gold' | 'Silver';
 }
 
 const PriceCard: React.FC<PriceCardProps> = ({ metal }) => {
@@ -14,9 +14,9 @@ const PriceCard: React.FC<PriceCardProps> = ({ metal }) => {
     const fetchPrice = async () => {
       try {
         const response = await fetch(
-          metal === "Gold"
-            ? "https://api.gold-api.com/price/XAU"
-            : "https://api.gold-api.com/price/XAG",
+          metal === 'Gold'
+            ? 'https://api.gold-api.com/price/XAU'
+            : 'https://api.gold-api.com/price/XAG'
         );
         const data = await response.json();
 
@@ -27,16 +27,18 @@ const PriceCard: React.FC<PriceCardProps> = ({ metal }) => {
         const pricePerGramInINR = pricePerGram * 84; // Assuming 1 USD = ₹84
 
         // Calculate price per unit (10g for Gold, 1kg for Silver)
-        const pricePerUnit =
-          metal === "Gold" ? pricePerGramInINR * 10 : pricePerGramInINR * 1000;
+        let pricePerUnit =
+          metal === 'Gold'
+            ? pricePerGramInINR * 10 + 5000 // Add 5000 to Gold price
+            : pricePerGramInINR * 1000 + 8000; // Add 8000 to Silver price
 
         setPricePerUnit(pricePerUnit);
       } catch (error) {
-        console.error("Error fetching price:", error);
+        console.error('Error fetching price:', error);
       }
     };
 
-    const interval = setInterval(fetchPrice, 1000); // Update price every 1 seconds
+    const interval = setInterval(fetchPrice, 1000); // Update price every 1 second
     fetchPrice(); // Fetch initial price
 
     return () => clearInterval(interval);
@@ -52,7 +54,7 @@ const PriceCard: React.FC<PriceCardProps> = ({ metal }) => {
         ₹{pricePerUnit.toFixed(2)}
       </p>
       <p className="text-sm text-golden-700 mb-4">
-        Per {metal === "Gold" ? "10g" : "1kg"}
+        Per {metal === 'Gold' ? '10g' : '1kg'}
       </p>
       <p className="text-xs text-golden-600">Lucknow, Uttar Pradesh, India</p>
       <div className="absolute top-0 right-0 bg-golden-100 p-2 rounded-bl-lg">
