@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter_Tight } from "next/font/google";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import { Analytics } from "@vercel/analytics/react"
 
 const interTight = Inter_Tight({ subsets: ["latin"] });
 
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className={interTight.className}>
         <Navbar />
         {children}
+        <Analytics/>
         <Footer />
       </body>
     </html>

@@ -24,7 +24,7 @@ const PriceCard: React.FC<PriceCardProps> = ({ metal }) => {
         const pricePerGram = data.price / 31.1034768;
 
         // Convert price to INR
-        const pricePerGramInINR = pricePerGram * 82.5; // Assuming 1 USD = ₹82.5
+        const pricePerGramInINR = pricePerGram * 84; // Assuming 1 USD = ₹84
 
         // Calculate price per unit (10g for Gold, 1kg for Silver)
         const pricePerUnit =
